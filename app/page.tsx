@@ -8,20 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-export const currencies = [
-  {
-    id: 1,
-    label: "USD",
-    value: "usd",
-  },
-  {
-    id: 2,
-    label: "EGP",
-    value: "egp",
-  },
-  { id: 3, label: "SAR", value: "sar" },
-];
+import { currencies } from "@/data/currencies";
 
 export default function Home() {
   return (
