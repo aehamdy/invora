@@ -1,15 +1,13 @@
-import BasicDetails from "./BasicDetails";
+import InvoiceDetails from "./InvoiceDetails";
 import ContactDetails from "./ContactDetails";
 import ItemList from "./ItemList";
-import TaxAndTotals from "./TaxAndTotals";
 
 function InvoiceForm() {
   return (
-    <div>
-      <BasicDetails />
+    <div className="space-y-4">
+      <InvoiceDetails />
       <ContactDetails />
       <ItemList />
-      <TaxAndTotals />
     </div>
   );
 }

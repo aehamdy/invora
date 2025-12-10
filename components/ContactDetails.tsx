@@ -1,38 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import { Separator } from "./ui/separator";
 
 function ContactDetails() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>From & To</CardTitle>
+    <Card className="flex gap-2">
+      <CardHeader className="flex justify-between items-center">
+        <CardTitle>Billed To</CardTitle>
       </CardHeader>
 
-      <CardContent className="grid grid-cols-2 gap-6">
-        <div className="flex flex-col gap-3">
-          <h3 className="font-medium">From</h3>
+      <Separator />
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="senderName">Name</Label>
-            <Input id="senderName" placeholder="Your name or company" />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="senderEmail">Email</Label>
-            <Input id="senderEmail" type="email" placeholder="your@email.com" />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <h3 className="font-medium">To</h3>
-
-          <div className="flex flex-col gap-2">
+      <CardContent className="space-y-4 mt-3">
+        <div className="flex justify-between items-center gap-6">
+          <div className="flex-1 flex flex-col gap-2">
             <Label htmlFor="clientName">Name</Label>
-            <Input id="clientName" placeholder="Client name or company" />
+            <Input id="clientName" placeholder="Client name" />
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex-1 flex flex-col gap-2">
             <Label htmlFor="clientEmail">Email</Label>
             <Input
               id="clientEmail"
