@@ -4,6 +4,7 @@ import { Plus } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import InvoiceItem from "./InvoiceItem";
+import { Separator } from "./ui/separator";
 
 export const items = [
   {
@@ -26,7 +27,7 @@ function ItemList() {
   const addItem = () => {};
 
   return (
-    <Card>
+    <Card className="flex gap-2">
       <CardHeader className="flex items-center justify-between">
         <CardTitle>Invoice Items</CardTitle>
 
@@ -36,7 +37,9 @@ function ItemList() {
         </Button>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <Separator />
+
+      <CardContent className="space-y-4 mt-3">
         {items.map((item, index) => (
           <InvoiceItem
             key={item.id}
