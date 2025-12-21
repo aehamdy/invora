@@ -7,13 +7,14 @@ export type Currencies = {
 export const currencies: Currencies[] = [
   {
     id: 1,
-    label: "USD",
-    value: "usd",
-  },
-  {
-    id: 2,
-    label: "EGP",
+    label: "EGP - Egyptian Pounds",
     value: "egp",
   },
-  { id: 3, label: "SAR", value: "sar" },
+  { id: 2, label: "SAR - Saudi Riyal", value: "sar" },
+  { id: 3, label: "AED - Emirate Dirham", value: "aed" },
+  {
+    id: 4,
+    label: "USD - United States Dollar",
+    value: "usd",
+  },
 ];
