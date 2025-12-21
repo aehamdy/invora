@@ -1,8 +1,11 @@
+"use client";
 import { Label } from "@radix-ui/react-label";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Separator } from "./ui/separator";
+import { useInvoiceStore } from "@/store/useInvoiceStore";
 
 function InvoicePreview() {
+  const { from, to, subject, dueDate, currency } = useInvoiceStore();
   return (
     <section className="bg-[#eeeeee] rounded-3xl overflow-hidden">
       <Card className="flex gap-2 py-0 bg-[#eeeeee] shadow-none border-none">
@@ -12,8 +15,9 @@ function InvoicePreview() {
       <Separator />
 
       <Card className="w-9/10 mt-2 mx-auto">
-        <CardHeader>
-          <CardTitle>Company Name</CardTitle>
+        <CardHeader className="flex justify-between items-center">
+          <CardTitle>{from.name}</CardTitle>
+          <p>{from.email}</p>
         </CardHeader>
 
         <Separator />
@@ -23,23 +27,23 @@ function InvoicePreview() {
             <div className="grid grid-cols-4">
               <div className="col-span-2">
                 <Label className="font-medium text-gray-400">Due Date</Label>
-                <p className="">10 January 2025</p>
+                <p className="">{dueDate}</p>
               </div>
               <div className="col-span-2">
                 <Label className="font-medium text-gray-400">Subject</Label>
-                <p className="">Electronic purchasing</p>
+                <p className="">{subject || "No subject provided"}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-4">
               <div className="col-span-2">
                 <Label className="font-medium text-gray-400">Billed To</Label>
-                <p className="">Darlene robertson</p>
-                <p className="">Darlene@email.com</p>
+                <p className="">{to.name}</p>
+                <p className="">{to.email}</p>
               </div>
               <div className="col-span-2">
                 <Label className="font-medium text-gray-400">Currency</Label>
-                <p className="">USD - United State Dollar</p>
+                <p>{currency.toUpperCase()}</p>
               </div>
             </div>
           </div>
