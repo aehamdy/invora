@@ -1,3 +1,4 @@
+"use client";
 import InvoiceForm from "@/components/InvoiceForm";
 import InvoicePreview from "@/components/InvoicePreview";
 import { Input } from "@/components/ui/input";
@@ -9,8 +10,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { currencies } from "@/data/currencies";
+import useInvoiceStore from "@/store/useInvoiceStore";
 
 export default function Home() {
+  const { from } = useInvoiceStore();
+
   return (
     <div className="min-h-screen bg-[#f7f7f7]">
       <header className="flex justify-between p-3">
@@ -26,18 +30,35 @@ export default function Home() {
 
         <div className="flex items-center gap-3">
           <div>
-            <Input id="senderName" placeholder="Your company's name" />
+            <Input
+              id="senderName"
+              placeholder="Your company's name"
+              onChange={(e) =>
+                useInvoiceStore.setState({
+                  from: { ...from, name: e.target.value },
+                })
+              }
+            />
           </div>
 
           <div>
             <Input
-              id="senderEmail"
               type="email"
+              id="senderEmail"
               placeholder="your-company@email.com"
+              onChange={(e) =>
+                useInvoiceStore.setState({
+                  from: { ...from, email: e.target.value },
+                })
+              }
             />
           </div>
 
-          <Select>
+          <Select
+            onValueChange={(value) =>
+              useInvoiceStore.setState({ currency: value })
+            }
+          >
             <SelectTrigger>
               <SelectValue placeholder="Select Currency" />
             </SelectTrigger>
