@@ -1,8 +1,10 @@
+"use client";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Separator } from "@radix-ui/react-separator";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useInvoiceStore } from "@/store/useInvoiceStore";
 import { Plus } from "lucide-react";
 import InvoiceItem from "./InvoiceItem";
 
@@ -24,6 +26,8 @@ export const items = [
 ];
 
 const InvoiceForm = () => {
+  const { setInvoiceDetails, subject, dueDate, to } = useInvoiceStore();
+
   return (
     <form action="" className="space-y-4">
       <Card className="flex gap-2">
@@ -40,13 +44,21 @@ const InvoiceForm = () => {
               <Input
                 type="text"
                 id="subject"
+                value={subject}
+                onChange={(e) => setInvoiceDetails({ subject: e.target.value })}
                 placeholder="Enter invoice subject"
               />
             </div>
 
             <div className="flex-1 flex flex-col gap-2">
               <Label htmlFor="invoiceDate">Due Date</Label>
-              <Input type="date" id="invoiceDate" />
+              <Input
+                type="date"
+                id="invoiceDate"
+                value={dueDate}
+                onChange={(e) => setInvoiceDetails({ dueDate: e.target.value })}
+                // {...register("dueDate")}
+              />
             </div>
           </div>
 
@@ -65,7 +77,18 @@ const InvoiceForm = () => {
           <div className="flex justify-between items-center gap-6">
             <div className="flex-1 flex flex-col gap-2">
               <Label htmlFor="clientName">Name</Label>
-              <Input type="text" id="clientName" placeholder="Client name" />
+              <Input
+                type="text"
+                id="clientName"
+                placeholder="Client name"
+                value={to.name}
+                onChange={(e) =>
+                  useInvoiceStore.setState((state) => ({
+                    to: { ...state.to, name: e.target.value },
+                  }))
+                }
+                // {...register("clientName")}
+              />
             </div>
 
             <div className="flex-1 flex flex-col gap-2">
@@ -74,6 +97,13 @@ const InvoiceForm = () => {
                 type="email"
                 id="clientEmail"
                 placeholder="client@email.com"
+                value={to.email}
+                onChange={(e) =>
+                  useInvoiceStore.setState((state) => ({
+                    to: { ...state.to, email: e.target.value },
+                  }))
+                }
+                // {...register("clientEmail")}
               />
             </div>
           </div>
@@ -108,10 +138,6 @@ const InvoiceForm = () => {
           ))}
         </CardContent>
       </Card>
-
-      {/* <InvoiceDetails /> */}
-      {/* <ContactDetails /> */}
-      {/* <ItemList /> */}
     </form>
   );
 };
