@@ -5,7 +5,8 @@ import { Separator } from "./ui/separator";
 import { useInvoiceStore } from "@/store/useInvoiceStore";
 
 function InvoicePreview() {
-  const { from, to, subject, dueDate, currency } = useInvoiceStore();
+  const { from, to, subject, dueDate, currency, notes } = useInvoiceStore();
+
   return (
     <section className="bg-[#eeeeee] rounded-3xl overflow-hidden">
       <Card className="flex gap-2 py-0 bg-[#eeeeee] shadow-none border-none">
@@ -16,7 +17,10 @@ function InvoicePreview() {
 
       <Card className="w-9/10 mt-2 mx-auto">
         <CardHeader className="flex justify-between items-center">
-          <CardTitle>{from.name}</CardTitle>
+          <div className="flex items-center gap-1">
+            <span className="font-bold">From:</span>
+            <CardTitle>{from.name}</CardTitle>
+          </div>
           <p>{from.email}</p>
         </CardHeader>
 
@@ -26,12 +30,12 @@ function InvoicePreview() {
           <div className="flex flex-col gap-6 font-medium text-sm text-gray-800">
             <div className="grid grid-cols-4">
               <div className="col-span-2">
-                <Label className="font-medium text-gray-400">Due Date</Label>
-                <p className="">{dueDate}</p>
-              </div>
-              <div className="col-span-2">
                 <Label className="font-medium text-gray-400">Subject</Label>
                 <p className="">{subject || "No subject provided"}</p>
+              </div>
+              <div className="col-span-2">
+                <Label className="font-medium text-gray-400">Due Date</Label>
+                <p className="">{dueDate}</p>
               </div>
             </div>
 
@@ -100,7 +104,7 @@ function InvoicePreview() {
 
           <div className="flex items-center gap-1 mt-2">
             <span className="font-bold">*NOTES:</span>
-            <p className="">Here comes the note</p>
+            <p className="">{notes}</p>
           </div>
         </CardContent>
       </Card>
