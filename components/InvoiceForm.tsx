@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { useInvoiceStore } from "@/store/useInvoiceStore";
 import { Plus } from "lucide-react";
 import InvoiceItem from "./InvoiceItem";
+import { Textarea } from "./ui/textarea";
 
 export const items = [
   {
@@ -26,10 +27,10 @@ export const items = [
 ];
 
 const InvoiceForm = () => {
-  const { setInvoiceDetails, subject, dueDate, to } = useInvoiceStore();
+  const { setInvoiceDetails, subject, dueDate, to, notes } = useInvoiceStore();
 
   return (
-    <form action="" className="space-y-4">
+    <form action="" className="mb-2 space-y-4">
       <Card className="flex gap-2">
         <CardHeader className="flex justify-between items-center">
           <CardTitle>Invoice Details</CardTitle>
@@ -138,6 +139,12 @@ const InvoiceForm = () => {
           ))}
         </CardContent>
       </Card>
+
+      <Textarea
+        placeholder="Write a note..."
+        className="bg-white"
+        onChange={(e) => useInvoiceStore.setState({ notes: e.target.value })}
+      />
     </form>
   );
 };
