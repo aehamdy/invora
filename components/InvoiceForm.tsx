@@ -9,25 +9,17 @@ import { Plus } from "lucide-react";
 import InvoiceItem from "./InvoiceItem";
 import { Textarea } from "./ui/textarea";
 
-export const items = [
-  {
-    id: 1,
-    description: "Website Design",
-    quantity: 1,
-    rate: 500,
-    amount: 500,
-  },
-  {
-    id: 2,
-    description: "Hosting (12+ months)",
-    quantity: 1,
-    rate: 120,
-    amount: 120,
-  },
-];
-
 const InvoiceForm = () => {
-  const { setInvoiceDetails, subject, dueDate, to, notes } = useInvoiceStore();
+  const { setInvoiceDetails, subject, dueDate, to, notes, items, addItem } =
+    useInvoiceStore();
+
+  const handleAddItem = () => {
+    addItem({
+      description: "",
+      quantity: 1,
+      rate: 0,
+    });
+  };
 
   return (
     <form action="" className="mb-2 space-y-4">
@@ -116,7 +108,8 @@ const InvoiceForm = () => {
           <CardTitle>Invoice Items</CardTitle>
 
           <Button
-            // onClick={addItem}
+            type="button"
+            onClick={handleAddItem}
             size="sm"
             className="w-fit cursor-pointer"
           >
@@ -128,15 +121,21 @@ const InvoiceForm = () => {
         <Separator />
 
         <CardContent className="space-y-4 mt-3">
-          {items.map((item, index) => (
-            <InvoiceItem
-              key={item.id}
-              {...item}
-              id={item.id.toString()}
-              index={index}
-              canRemove={items.length > 1}
-            />
-          ))}
+          {items.length === 0 ? (
+            <div className="text-center py-4 text-muted-foreground">
+              No items added yet
+            </div>
+          ) : (
+            items.map((item, index) => (
+              <InvoiceItem
+                key={item.id}
+                {...item}
+                id={item.id.toString()}
+                index={index}
+                canRemove={items.length > 1}
+              />
+            ))
+          )}
         </CardContent>
       </Card>
 
