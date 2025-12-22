@@ -132,7 +132,7 @@ const InvoiceForm = () => {
                 {...item}
                 id={item.id.toString()}
                 index={index}
-                canRemove={items.length > 1}
+                canRemove={true}
               />
             ))
           )}

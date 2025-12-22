@@ -22,6 +22,8 @@ function InvoiceItem({
   canRemove,
   onRemove,
 }: InvoiceItemProps) {
+  const { removeItem } = useInvoiceStore();
+
   const updateItem = useInvoiceStore((state) => state.updateItem);
 
   const handleQuantityChange = useCallback(
@@ -53,6 +55,10 @@ function InvoiceItem({
       currency: "USD",
     }).format(amount);
   }, [amount]);
+
+  const handleRemoveItem = (id: string) => {
+    removeItem(id);
+  };
   return (
     <div className="grid grid-cols-12 gap-4 p-4 border rounded-lg">
       <div className="col-span-5 space-y-1">
@@ -96,7 +102,7 @@ function InvoiceItem({
         <Button
           variant="outline"
           size="icon"
-          onClick={onRemove}
+          onClick={() => handleRemoveItem(id)}
           disabled={!canRemove}
           className="w-full cursor-pointer"
         >
