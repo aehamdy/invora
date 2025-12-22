@@ -63,7 +63,7 @@ export const useInvoiceStore = create<InvoiceState>((set, get) => ({
         amount: item.quantity * item.rate,
       };
 
-      const newItems = [...state.items, newItem];
+      const newItems = [newItem, ...state.items];
       const subtotal = newItems.reduce((sum, item) => sum + item.amount, 0);
       const taxAmount = subtotal * (state.taxRate / 100);
 
