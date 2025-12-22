@@ -103,7 +103,7 @@ function InvoicePreview() {
           <Separator />
 
           <div className="flex items-center gap-1 mt-2">
-            <span className="font-bold">*NOTES:</span>
+            {notes && <span className="font-bold">*NOTES:</span>}
             <p className="">{notes}</p>
           </div>
         </CardContent>
