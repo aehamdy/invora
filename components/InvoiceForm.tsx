@@ -143,6 +143,7 @@ const InvoiceForm = () => {
       <Textarea
         placeholder="Write a note..."
         className="bg-white"
+        value={notes}
         onChange={(e) => useInvoiceStore.setState({ notes: e.target.value })}
       />
     </form>
